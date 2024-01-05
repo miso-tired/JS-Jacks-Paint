@@ -1,20 +1,34 @@
+console.log('Paint script loaded')
+
+document.addEventListener('DOMContentLoaded', function () {
+    configureListeners();
+});
+
 function configureListeners() {
     let images = document.getElementsByTagName('img')
 
 
      for (var i = 0; i < images.length; i++) {        
         document.getElementById(images[i].id).addEventListener('mouseover', addOpacity, false)
-        document.getElementById(images[i].id).addEventListener('mouseover', removeOpacityOpacity, false)
+        document.getElementById(images[i].id).addEventListener('mouseover', removeOpacity, false)
     } 
 }
 
 function addOpacity(event) {
+    console.log('mouseover event triggered');
     // add appropriate CSS class
+    if (!this.classList.contains('dim')) {
+        this.classList.add('dim')
+    }
     getProductInfo(event.target.id);     
 }
 
 function removeOpacity(event) {
+    console.log('mouseout event triggered')
      //remove appropriate CSS class
+     if (this.classList.contains('dim')) {
+        this.classList.remove('dim');
+     }
 
     let element = document.getElementById('color-price');
         element.textContent = '';
@@ -26,47 +40,63 @@ function removeOpacity(event) {
 }
 
 function getProductInfo(paintColor) {
+    console.log('getProductInfo called with color:', paintColor);
     let price;
     let colorName;  
     
     switch (paintColor) {
         case 'pn1':           
-            // set variables for price and color name and invoke a function to update the price     
+            price = '$14.99'
+            colorName = 'Lime Green'   
             break;           
         case 'pn2':
-            // set variables for price and color name and invoke a function to update the price    
+            price = '$11.14' 
+            colorName = 'Medium Brown'  
             break;            
         case 'pn3':
-            // set variables for price and color name and invoke a function to update the price  
+            price = '$22.99'
+            colorName = 'Royal Blue'
             break;   
         case 'pn4':
-            // set variables for price and color name and invoke a function to update the price  
+            price = '$13.42'
+            colorName = 'Solid Red'
             break;   
         case 'pn5':
-            // set variables for price and color name and invoke a function to update the price       
+            price = '$21.98'
+            colorName = 'Solid White'     
             break;   
         case 'pn6':
-            // set variables for price and color name and invoke a function to update the price        
+            price = '$4.99'
+            colorName = 'Solid Black'       
             break;   
         case 'pn7':
-            // set variables for price and color name and invoke a function to update the price 
+            price = '$8.22'
+            colorName = 'Solid Cyan'
             break;   
         case 'pn8':
-            // set variables for price and color name and invoke a function to update the price   
+            price = '$11.99'
+            colorName = 'Solid Purple'
             break;   
         case 'pn9':
-            // set variables for price and color name and invoke a function to update the price 
+            price = '$14.99'
+            colorName = 'Solid Yellow'
             break;   
           default:              
     }
-
-    function updatePrice(colorName, price)
-    {       
-        let colorPrice = // select element with corresponding id
-        // display price
-        
-        let color = // select element with corresponding id
-        //display color name
-    }
-    
+    console.log('Product info:', { colorName, price });
+    updatePrice(colorName, price);
 }
+    
+    function updatePrice(colorName, price) {   
+        console.log('updatePrice called with colorName', colorName, 'and price', price);
+        console.log('Before setting content - price:', document.getElementById('color-price').textContent); 
+        
+        let colorPrice = document.getElementById('color-price')
+        colorPrice.textContent = price;
+        
+        let color = document.getElementById('color-name')
+        color.textContent = colorName;
+
+        console.log('After setting content - color:', document.getElementById('color-name').textContent);
+        console.log('After setting content - price:', document.getElementById('color-price').textContent);
+    }
