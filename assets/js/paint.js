@@ -7,12 +7,12 @@ document.addEventListener('DOMContentLoaded', function () {
 function configureListeners() {
     let images = document.getElementsByTagName('img')
 
-
-     for (var i = 0; i < images.length; i++) {        
-        document.getElementById(images[i].id).addEventListener('mouseover', addOpacity, false)
-        document.getElementById(images[i].id).addEventListener('mouseover', removeOpacity, false)
-    } 
+    for (var i = 0; i < images.length; i++) {
+        document.getElementById(images[i].id).addEventListener('mouseover', addOpacity, false);
+        document.getElementById(images[i].id).addEventListener('mouseout', removeOpacity, false);
+    }
 }
+
 
 function addOpacity(event) {
     console.log('mouseover event triggered');
